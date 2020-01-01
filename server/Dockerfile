@@ -5,7 +5,7 @@ FROM node:alpine
 WORKDIR /app
 
 #Copy package.json to Workdir
-COPY ./packege.json ./
+COPY ./package.json ./
 
 # Install Dependencies
 RUN npm install
