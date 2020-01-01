@@ -15,6 +15,7 @@ script:
 
 # Push Built Images to Docker after tests succeed
 after_success:
+  # Build Images
   - docker build -t sathishcodes/multi-client ./client
   - docker build -t sathishcodes/multi-nginx ./nginx
   - docker build -t sathishcodes/multi-server ./server
