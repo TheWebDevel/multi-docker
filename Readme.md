@@ -2,8 +2,8 @@
 
 ## Containers
 
-- Client with React & nginx to server build files
-- API Server with Express JS
+- Client built with React & nginx to serve build files
+- API Server built with Express JS
 - Worker
 - Postgres
 - Redis
