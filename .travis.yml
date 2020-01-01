@@ -23,7 +23,7 @@ after_success:
   # Login into Docker Hub
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
 
-  # Take the built images and push them to Docker Hub
+  # Take the built images from Travis and push them to Docker Hub
   - docker push sathishcodes/multi-client
   - docker push sathishcodes/multi-nginx
   - docker push sathishcodes/multi-server
