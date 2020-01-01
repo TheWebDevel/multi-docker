@@ -1,0 +1,30 @@
+# Super user permission
+sudo: required
+
+# Services
+services:
+  - docker
+
+# Build Docker Dev to Run Tests
+before-install:
+  - docker build -t sathishcodes/react-test -f ./client/Dockerfile.dev ./client
+
+# Run Tests
+script:
+  - docker run -e CI=true sathishcodes/react-test npm run test
+
+# Push Built Images to Docker after tests succeed
+after_success:
+  - docker build -t sathishcodes/multi-client ./client
+  - docker build -t sathishcodes/multi-nginx ./nginx
+  - docker build -t sathishcodes/multi-server ./server
+  - docker build -t sathishcodes/multi-worker ./worker
+
+  # Login into Docker Hub
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+
+  # Take the built images and push them to Docker Hub
+  - docker push sathishcodes/multi-client
+  - docker push sathishcodes/multi-nginx
+  - docker push sathishcodes/multi-server
+  - docker push sathishcodes/multi-worker
